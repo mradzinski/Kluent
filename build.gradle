@@ -1,6 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.0.6'
-    ext.spek_version = "1.0.+"
+    ext.kotlin_version = '1.1.0-beta-38'
+    ext.spek_version = '1.1.0-beta3'
     repositories {
         jcenter()
     }
@@ -10,8 +10,8 @@ buildscript {
     }
 }
 
-group 'org.amshove.kluent'
-version '1.14'
+group 'com.github.mradzinski'
+version '1.2'
 
 apply plugin: 'kotlin'
 apply plugin: 'idea'
@@ -48,29 +48,4 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 artifacts {
     archives sourcesJar
-}
-
-bintrayUpload.dependsOn install
-
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    publications = ['PublishKluent']
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "Kluent"
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/MarkusAmshove/Kluent'
-    }
-}
-publishing {
-    publications {
-        PublishKluent(MavenPublication) {
-            from components.java
-            groupId 'org.amshove.kluent'
-            artifactId 'kluent'
-            version project.version
-        }
-    }
 }
